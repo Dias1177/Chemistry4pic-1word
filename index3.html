@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Картинки - 1 Слово</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .images img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .word {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .letter {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            margin: 0 5px;
+            font-size: 24px;
+            font-weight: bold;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            background: #fff;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .letters {
+            display: grid;
+            grid-template-columns: repeat(8, 50px);
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .letters button {
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border: 2px solid #007BFF;
+            border-radius: 5px;
+            background: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .letters button:hover {
+            background: #0056b3;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Уровень 3</h1>
+        <div class="images">
+            <img style="width: 180px;" src="level3/image1.png" alt="Image 1">
+            <img style="width: 180px;" src="level3/image2.png" alt="Image 2">
+            <img style="width: 180px;" src="level3/image3.png" alt="Image 3">
+            <img style="width: 180px;" src="level3/image4.png" alt="Image 4">
+        </div>
+        <div class="word" id="word-container">
+            <!-- Letters for the answer will appear here -->
+        </div>
+        <div class="letters" id="letters-container">
+            <!-- Letter buttons will be dynamically added here -->
+        </div>
+        <div class="message" id="message"></div>
+        <a style="visibility: hidden;" href="index4.html" class="next-btn" id="next-btn"><button>Далее</button></a>
+    </div>
+
+    <script>
+        const correctWord = 'СТАЛЬ';
+        const shuffledLetters = ['О', 'С', 'И', 'Ь', 'С', 'О', 'В', 'Ф', 'А', 'П', 'И', 'Т', 'Т', 'З', 'С', 'Л'];
+        const wordContainer = document.getElementById('word-container');
+        const lettersContainer = document.getElementById('letters-container');
+        const message = document.getElementById('message');
+        const nextBtn = document.getElementById('next-btn')
+
+        let currentAnswer = '';
+        const selectedButtons = [];
+
+        // Create empty spaces for the word
+        for (let i = 0; i < correctWord.length; i++) {
+            const span = document.createElement('span');
+            span.classList.add('letter');
+            span.addEventListener('click', () => removeLetter(i));
+            wordContainer.appendChild(span);
+        }
+
+        // Create letter buttons
+        shuffledLetters.forEach(letter => {
+            const button = document.createElement('button');
+            button.textContent = letter;
+            button.addEventListener('click', () => selectLetter(letter, button));
+            lettersContainer.appendChild(button);
+        });
+
+        function selectLetter(letter, button) {
+            if (currentAnswer.length < correctWord.length) {
+                currentAnswer += letter;
+                selectedButtons.push(button);
+                updateWordContainer();
+                button.style.visibility = 'hidden';
+
+                if (currentAnswer.length === correctWord.length) {
+                    checkAnswer();
+                }
+            }
+        }
+
+        function removeLetter(index) {
+            if (currentAnswer[index]) {
+                const removedLetter = currentAnswer[index];
+                currentAnswer = currentAnswer.slice(0, index) + currentAnswer.slice(index + 1);
+                updateWordContainer();
+                const buttonToRestore = selectedButtons.splice(index, 1)[0];
+                if (buttonToRestore) buttonToRestore.style.visibility = 'visible';
+            }
+        }
+
+        function updateWordContainer() {
+            const letters = wordContainer.querySelectorAll('.letter');
+            letters.forEach((span, index) => {
+                span.textContent = currentAnswer[index] || '';
+            });
+        }
+
+        function checkAnswer() {
+            if (currentAnswer === correctWord) {
+                message.textContent = 'Правильно!';
+                nextBtn.style.visibility = 'visible';
+            } else {
+                message.textContent = '';
+                currentAnswer = '';
+                resetLetters();
+                updateWordContainer();
+            }
+        }
+
+        function resetLetters() {
+            const buttons = lettersContainer.querySelectorAll('button');
+            buttons.forEach(button => button.style.visibility = 'visible');
+            selectedButtons.length = 0;
+        }
+    </script>
+</body>
+</html>

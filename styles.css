@@ -1,0 +1,184 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.images img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.word {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.letter {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  margin: 0 5px;
+  font-size: 24px;
+  font-weight: bold;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background: #fff;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.letters {
+  display: grid;
+  grid-template-columns: repeat(8, 50px);
+  gap: 10px;
+  justify-content: center;
+}
+
+.letters button {
+  width: 50px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #007BFF;
+  border-radius: 5px;
+  background: #007BFF;
+  color: #fff;
+  cursor: pointer;
+}
+
+.letters button:hover {
+  background: #0056b3;
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+}
+
+
+
+
+
+
+
+
+
+h1 {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buttons {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.buttons:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.buttons:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .container {
+      padding: 10px;
+  }
+
+  .images {
+      grid-template-columns: 1fr;
+      gap: 5px;
+  }
+
+  .word {
+      flex-wrap: wrap;
+  }
+
+  .letter {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      margin: 2px;
+  }
+
+  .letters {
+      grid-template-columns: repeat(4, 40px);
+      gap: 5px;
+  }
+
+  .letters button {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+      font-size: 20px;
+  }
+
+  .letter {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 16px;
+  }
+
+  .letters {
+      grid-template-columns: repeat(4, 30px);
+  }
+
+  .letters button {
+      width: 30px;
+      height: 30px;
+      font-size: 14px;
+  }
+}

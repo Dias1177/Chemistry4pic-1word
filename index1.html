@@ -4,87 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>4 Картинки - 1 Слово</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-
-        .images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .images img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .word {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-
-        .letter {
-            width: 50px;
-            height: 50px;
-            line-height: 50px;
-            margin: 0 5px;
-            font-size: 24px;
-            font-weight: bold;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            background: #fff;
-            color: #333;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-
-        .letters {
-            display: grid;
-            grid-template-columns: repeat(8, 50px);
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .letters button {
-            width: 50px;
-            height: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            border: 2px solid #007BFF;
-            border-radius: 5px;
-            background: #007BFF;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .letters button:hover {
-            background: #0056b3;
-        }
-
-        .message {
-            margin-top: 20px;
-            font-size: 24px;
-            font-weight: bold;
-            color: green;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -102,7 +22,7 @@
             <!-- Letter buttons will be dynamically added here -->
         </div>
         <div class="message" id="message"></div>
-        <a style="visibility: hidden;" href="index2.html" class="next-btn" id="next-btn"><button>Далее</button></a>
+        <a style="visibility: hidden;" href="index2.html" class="next-btn" id="next-btn"><button class="buttons">Далее</button></a>
     </div>
 
     <script>

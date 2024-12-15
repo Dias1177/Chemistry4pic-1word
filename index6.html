@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 Картинки - 1 Слово</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Уровень 6</h1>
+        <div class="images">
+            <img style="width: 180px;" src="level6/image1.png" alt="Image 1">
+            <img style="width: 180px;" src="level6/image2.png" alt="Image 2">
+            <img style="width: 180px;" src="level6/image3.png" alt="Image 3">
+            <img style="width: 180px;" src="level6/image4.jpg" alt="Image 4">
+        </div>
+        <div class="word" id="word-container">
+            <!-- Letters for the answer will appear here -->
+        </div>
+        <div class="letters" id="letters-container">
+            <!-- Letter buttons will be dynamically added here -->
+        </div>
+        <div class="message" id="message"></div>
+        <a style="visibility: hidden;" href="index7.html" class="next-btn" id="next-btn"><button class="buttons">Далее</button></a>
+    </div>
+
+    <script>
+        const correctWord = 'КОРРОЗИЯ';
+        const shuffledLetters = ['И', 'З', 'Р', 'И', 'Х', 'О', 'Я', 'К', 'В', 'Н', 'Р', 'И', 'О', 'Ш', 'Р', 'Ц'];
+        const wordContainer = document.getElementById('word-container');
+        const lettersContainer = document.getElementById('letters-container');
+        const message = document.getElementById('message');
+        const nextBtn = document.getElementById('next-btn')
+
+        let currentAnswer = '';
+        const selectedButtons = [];
+
+        // Create empty spaces for the word
+        for (let i = 0; i < correctWord.length; i++) {
+            const span = document.createElement('span');
+            span.classList.add('letter');
+            span.addEventListener('click', () => removeLetter(i));
+            wordContainer.appendChild(span);
+        }
+
+        // Create letter buttons
+        shuffledLetters.forEach(letter => {
+            const button = document.createElement('button');
+            button.textContent = letter;
+            button.addEventListener('click', () => selectLetter(letter, button));
+            lettersContainer.appendChild(button);
+        });
+
+        function selectLetter(letter, button) {
+            if (currentAnswer.length < correctWord.length) {
+                currentAnswer += letter;
+                selectedButtons.push(button);
+                updateWordContainer();
+                button.style.visibility = 'hidden';
+
+                if (currentAnswer.length === correctWord.length) {
+                    checkAnswer();
+                }
+            }
+        }
+
+        function removeLetter(index) {
+            if (currentAnswer[index]) {
+                const removedLetter = currentAnswer[index];
+                currentAnswer = currentAnswer.slice(0, index) + currentAnswer.slice(index + 1);
+                updateWordContainer();
+                const buttonToRestore = selectedButtons.splice(index, 1)[0];
+                if (buttonToRestore) buttonToRestore.style.visibility = 'visible';
+            }
+        }
+
+        function updateWordContainer() {
+            const letters = wordContainer.querySelectorAll('.letter');
+            letters.forEach((span, index) => {
+                span.textContent = currentAnswer[index] || '';
+            });
+        }
+
+        function checkAnswer() {
+            if (currentAnswer === correctWord) {
+                message.textContent = 'Правильно!';
+                nextBtn.style.visibility = 'visible';
+            } else {
+                message.textContent = '';
+                currentAnswer = '';
+                resetLetters();
+                updateWordContainer();
+            }
+        }
+
+        function resetLetters() {
+            const buttons = lettersContainer.querySelectorAll('button');
+            buttons.forEach(button => button.style.visibility = 'visible');
+            selectedButtons.length = 0;
+        }
+    </script>
+</body>
+</html>
